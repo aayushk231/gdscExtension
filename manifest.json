@@ -1,0 +1,30 @@
+{
+    "name": "Extension Test",
+    "version": "1.0.0",
+    "description": "test",
+    "manifest_version": 3,
+    "author": "aayush",
+    "permissions": [
+        "storage"
+    ],
+    "action":{
+        "default_popup": "pop.html",
+        "default_title": "def_title"
+    },
+    "content_scripts": [
+        {
+            "matches": ["file:///C:/Users/aayus/Downloads/VTOP/VTOP/VIT%20-%20VTOP%20REGISTRATION_actual%20page.html"],
+            "js": ["modify.js"]
+        },
+
+        {
+            "matches": ["file:///C:/Users/aayus/Downloads/VTOP/VTOP/VIT%20-%20VTOP%20REGISTRATION_withlab.html"],
+            "js": ["regWithLab.js"]
+        },
+
+        {
+            "matches": ["file:///C:/Users/aayus/Downloads/VTOP/VTOP/*"],
+            "js": ["s3.js"]
+        }
+    ]
+}
