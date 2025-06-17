@@ -7,7 +7,7 @@ const loginView = document.getElementById("login-view");
 const logoutBtn = document.getElementById("logout-button");
 const SERVER_URL = "http://localhost:3000";
 
-
+//Login function
 async function loginUser(username, password) {
     const response = await fetch(SERVER_URL + '/login', {
         method: "POST",
@@ -29,12 +29,14 @@ async function loginUser(username, password) {
     }
 }
 
+//Function to diplay the user-view
 function displayUser(name) {
     loginView.style.display = 'none';
     userView.style.display = 'block';
     document.getElementById('user-name').innerHTML = name;
 }
 
+//Function to display the login-view
 function displayLogin(err) {
     userView.style.display = 'none';
     loginView.style.display = 'block';
@@ -43,6 +45,7 @@ function displayLogin(err) {
     }
 }
 
+//Function to verify pre-existing tokens
 async function verifyToken() {
     chrome.storage.local.get("token", async (extensionData) => {
         if (extensionData.token) {
@@ -64,12 +67,12 @@ async function verifyToken() {
     });
 }
 
-
-
+//Check token on page load; for logged in users
 document.addEventListener("DOMContentLoaded", async function () {
     await verifyToken();
 });
 
+//Login the user
 loginForm.onsubmit = async function (e) {
     e.preventDefault();
     const username = usernameField.value;

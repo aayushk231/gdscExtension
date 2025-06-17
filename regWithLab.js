@@ -1,4 +1,6 @@
 //Hide teachers with zero seats left - in registration with lab
+
+//Placeholder data for testing
 const subjects = {
     "BCSE208L-Data Mining": {
         "teacher": {
@@ -17,11 +19,6 @@ const subjects = {
                 "venue": "SJT508",
                 "color": "rgb(214, 255, 214)"
             },
-            "LAVANYA K (E)": {
-                "slots": "F2+L23+L24",
-                "venue": "SJT513",
-                "color": "rgb(214, 255, 214)"
-            },
             "DHEEBA J": {
                 "slots": "F1+L45+L46",
                 "venue": "SJT513",
@@ -35,6 +32,8 @@ const subjects = {
         "credits": 0
     }
 }
+
+
 const courseCodeAndNameArray = document.querySelector("div.table-responsive").getElementsByTagName("tr")[1].getElementsByTagName("span")[0].textContent.split(" - ");
 const courseCodeAndName = courseCodeAndNameArray[0] + "-" + courseCodeAndNameArray[1];
 const teachersList = subjects[courseCodeAndName]['teacher'];
@@ -44,7 +43,7 @@ for (element of elements)
 {
     let tableRow = element.parentElement;
     //Hiding the element if seats are Full
-    if (element.parentElement.getElementsByTagName("span")[0].textContent == '0')
+    if (element.parentElement.getElementsByTagName("span")[0].textContent == '0')  //Set to 'Full' for hiding; 0 for testing
     {
         element.parentElement.style.display = "none";
     }
