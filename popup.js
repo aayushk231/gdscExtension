@@ -80,3 +80,9 @@ loginForm.onsubmit = async function (e) {
 
     await loginUser(username, password);
 }
+
+document.getElementById('addSidebarBtn').addEventListener('click', () => {
+  chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+    chrome.tabs.sendMessage(tabs[0].id, {action: 'toggleSidebar'});
+  });
+});
