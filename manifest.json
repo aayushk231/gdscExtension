@@ -25,6 +25,24 @@
         {
             "matches": ["file:///C:/Users/aayus/Downloads/VTOP/VTOP/*"],
             "js": ["s3.js"]
+        },
+        {
+            "matches": ["file:///home/devansharora18/Downloads/VTOP/VTOP/VIT%20-%20VTOP%20REGISTRATION_actual%20page.html"],
+            "js": ["modify.js", "sidebar.js"]
+        },
+        
+        {
+            "matches": ["file:///home/devansharora18/Downloads/VTOP/VTOP/VIT%20-%20VTOP%20REGISTRATION_withlab.html"],
+            "js": ["regWithLab.js"]
+        },
+
+        {
+            "matches": ["file:///home/devansharora18/Downloads/VTOP/VTOP/*"],
+            "js": ["s3.js"]
+        },
+        {
+            "matches": ["file:///home/devansharora18/Downloads/VTOP/VTOP/VTOP-Dummy.html"],
+            "js": ["modify.js", "sidebar.js"]
         }
     ]
 }

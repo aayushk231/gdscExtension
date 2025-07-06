@@ -1,0 +1,90 @@
+body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            width: 300px;
+        }
+        .container {
+            padding: 20px;
+        }
+        /* Login View */
+        #login-view {
+            display: none;
+        }
+        #login-view h2 {
+            text-align: center;
+            color: #1c1e21;
+        }
+        #login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .input-group label {
+            margin-bottom: 4px;
+            font-size: 14px;
+            color: #606770;
+        }
+        .input-group input {
+            padding: 10px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        #login-button {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #login-button:hover {
+            background-color: #166fe5;
+        }
+        #error-message {
+            color: #fa383e;
+            font-size: 14px;
+            text-align: center;
+            min-height: 18px;
+            margin-top: 5px;
+        }
+
+        /* User View */
+        #user-view {
+            /* display: none; */
+            text-align: center;
+        }
+        #user-view h2 {
+            color: #1c1e21;
+            font-size: 22px;
+        }
+        #user-view span {
+            font-weight: bold;
+            color: #1877f2;
+        }
+        #logout-button {
+            background-color: #e4e6eb;
+            color: #4b4f56;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.2s;
+        }
+        #logout-button:hover {
+            background-color: #d8dbdf;
+        }
+        #sidebar {
+    margin-top: 20px;
+}
