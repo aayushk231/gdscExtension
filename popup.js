@@ -1,3 +1,5 @@
+const SERVER_URL = "http://localhost:3000";
+
 const usernameField = document.getElementById("username");
 const passwordField = document.getElementById("password");
 const loginForm = document.getElementById("login-form");
@@ -5,7 +7,10 @@ const errorMsg = document.getElementById("error-message");
 const userView = document.getElementById("user-view");
 const loginView = document.getElementById("login-view");
 const logoutBtn = document.getElementById("logout-button");
-const SERVER_URL = "http://localhost:3000";
+const timeTableSyncStatus = document.getElementById("timeTableSyncStatus");
+const timeTableSyncTime = document.getElementById("timeTableSyncTime");
+const uploadBtn = document.getElementById("upload-button");
+
 
 //Login function
 async function loginUser(username, password) {
@@ -23,7 +28,9 @@ async function loginUser(username, password) {
 
     if (response.ok) {
         displayUser(data.name);
-        chrome.storage.local.set({ token: data.token });
+
+        chrome.storage.local.set({ token: data.token }); //Store JWT
+        chrome.runtime.sendMessage("Set-Content-Scripts"); //Set Content-scripts
     } else {
         errorMsg.innerHTML = data.msg;
     }
@@ -60,16 +67,52 @@ async function verifyToken() {
             if (response.ok) {
                 displayUser(data.name);
             } else if (response.status === 403) {
-                chrome.storage.local.remove("token", () => { console.log("Token Unset") });
-                displayLogin("Login Again Please");
+                chrome.storage.local.remove("token", () => { console.log("Token Unset") }); //Remove JWT
+                chrome.runtime.sendMessage("Unset-Content-Scripts");
+                logout("Login Again Please");
+
+            } else {
+                logout("Error");
             }
         }
+        else {
+            logout();
+        }
     });
+}
+
+//Function to logout user and do the necessary cleanup
+function logout(loginMessage) {
+    chrome.runtime.sendMessage("Unset-Content-Scripts");
+    chrome.storage.local.remove("token", () => { console.log("Token Unset") });
+    chrome.storage.local.remove("timeTable");
+    chrome.storage.local.remove("timeTableSyncTime");
+    timeTableSyncStatus.textContent = "Not Synced";
+    timeTableSyncStatus.style.color = "red";
+    timeTableSyncTime.textContent = "";
+    displayLogin(loginMessage);
+}
+
+//Function to check if the timetable is synced
+function checkTimeTable() {
+    chrome.storage.local.get("timeTableSyncTime", (data) => {
+        if (data.timeTableSyncTime) {
+            timeTableSyncStatus.textContent = "Synced";
+            timeTableSyncStatus.style.color = "green";
+            timeTableSyncTime.textContent = "Sync Time: " + data.timeTableSyncTime;
+        }
+        else {
+            timeTableSyncStatus.textContent = "Not Synced";
+            timeTableSyncStatus.style.color = "red";
+            timeTableSyncTime.textContent = "";
+        }
+    })
 }
 
 //Check token on page load; for logged in users
 document.addEventListener("DOMContentLoaded", async function () {
     await verifyToken();
+    checkTimeTable();
 });
 
 //Login the user
@@ -79,7 +122,13 @@ loginForm.onsubmit = async function (e) {
     const password = passwordField.value;
 
     await loginUser(username, password);
+    passwordField.value = '';
 }
+
+//Logout the user
+logoutBtn.addEventListener("click", () => {
+    logout("Logged Out");
+})
 
 document.getElementById('addSidebarBtn').addEventListener('click', () => {
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {

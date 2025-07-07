@@ -5,26 +5,24 @@
     "manifest_version": 3,
     "author": "aayush",
     "permissions": [
-        "storage"
+        "storage", "scripting"
     ],
+
+    "host_permissions":["file:///C:/Users/aayus/Downloads/VTOP/VTOP/*", "https://ffcs.sarveshdakhore.in/*"],
+
     "action":{
         "default_popup": "pop.html",
-        "default_title": "def_title"
+        "default_title": "GDSC"
     },
+    "background": {"service_worker": "service_worker.js"},
     "content_scripts": [
         {
-            "matches": ["file:///C:/Users/aayus/Downloads/VTOP/VTOP/VIT%20-%20VTOP%20REGISTRATION_actual%20page.html"],
-            "js": ["modify.js"]
-        },
-
-        {
-            "matches": ["file:///C:/Users/aayus/Downloads/VTOP/VTOP/VIT%20-%20VTOP%20REGISTRATION_withlab.html"],
-            "js": ["regWithLab.js"]
-        },
-
-        {
-            "matches": ["file:///C:/Users/aayus/Downloads/VTOP/VTOP/*"],
+            "matches": ["file:///C:/Users/aayus/Downloads/VTOP/*"],
             "js": ["s3.js"]
+        },
+        {
+            "matches": ["file:///C:/Users/aayus/Downloads/VTOP/*"],
+            "js": ["sidebar.js"]
         },
         {
             "matches": ["file:///home/devansharora18/Downloads/VTOP/VTOP/VIT%20-%20VTOP%20REGISTRATION_actual%20page.html"],
